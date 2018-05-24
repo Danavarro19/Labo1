@@ -13,6 +13,6 @@ package Conversor;
  */
 public interface Conversor<E,F> {
     
-    F convertir(E e);
+    String convertir(E e);
     
 }

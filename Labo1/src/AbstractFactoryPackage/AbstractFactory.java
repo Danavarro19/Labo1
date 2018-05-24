@@ -12,9 +12,9 @@ import Conversor.Conversor;
  *
  * @author LN710Q
  */
-public interface AbstractFactory {
+public interface AbstractFactory <E>{
     
-    Conversor getConversor(String type);
-    Aritmetico getAritmetico(String type);
+    Conversor getConversor(E e);
+    Aritmetico getAritmetico(E e);
     
 }

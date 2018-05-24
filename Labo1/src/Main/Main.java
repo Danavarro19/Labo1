@@ -5,12 +5,14 @@
  */
 package Main;
 
+import Conversor.Conversion;
+import Conversor.ConversorFactory;
 import GUI.Ventana;
 import javax.swing.JFrame;
 
 /**
  *
- * @author LN710Q
+ * @author Daniel
  */
 public class Main {
         /**
@@ -25,8 +27,9 @@ public class Main {
         ventana.pack();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
-        
-        }
+
+
+    }
     
     
     

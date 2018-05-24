@@ -12,26 +12,26 @@ import Conversor.Conversor;
  *
  * @author LN710Q
  */
-public class AritmeticoFactory implements AbstractFactory{
+public class AritmeticoFactory implements AbstractFactory <Operacion>{
 
     @Override
-    public Conversor getConversor(String type) {
+    public Conversor getConversor(Operacion operacion) {
         return null;
     }
 
     @Override
-    public Aritmetico getAritmetico(String type) {
+    public Aritmetico getAritmetico(Operacion operacion) {
         
-        switch(type){
-            case "suma":
+        switch(operacion){
+            case SUMA:
                 return new Suma();
-            case "resta":
+            case RESTA:
                 return new Resta();
                 
-            case "multipliacion":
+            case MULTIPLICACION:
                 return new Multipliacion();
                 
-            case "division":
+            case DIVISION:
                 return new Division();
                 
             default: 

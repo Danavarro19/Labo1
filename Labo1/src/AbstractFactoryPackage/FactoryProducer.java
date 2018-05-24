@@ -14,12 +14,12 @@ import Conversor.ConversorFactory;
  */
 public class FactoryProducer {
     
-    public static AbstractFactory getFactory(String type){
-        switch (type){
-            case "Aritmetico":
+    public static AbstractFactory getFactory(Calculo calculo){
+        switch (calculo){
+            case ARITMETCO:
                 return new AritmeticoFactory();
         
-            case "Conversor":
+            case CONVERSION:
                 return new ConversorFactory();
                 
             default:

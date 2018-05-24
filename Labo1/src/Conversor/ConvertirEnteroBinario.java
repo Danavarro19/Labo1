@@ -15,8 +15,9 @@ public class ConvertirEnteroBinario implements Conversor <Integer, String> {
     @Override
     public String convertir(Integer e) {
         String binario="";
-        while (e>1){
+        while (e>=1){
             binario+=e%2;
+            e=e/2;
         }
         binario+=e;
         binario = new StringBuilder(binario).reverse().toString();

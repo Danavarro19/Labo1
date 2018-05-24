@@ -12,12 +12,12 @@ import Aritmetico.Aritmetico;
  *
  * @author LN710Q
  */
-public class ConversorFactory implements AbstractFactory {
+public class ConversorFactory implements AbstractFactory <Conversion>{
 
     @Override
-    public Conversor getConversor(String type) {
-        switch(type){
-            case "DecimalBinario":
+    public Conversor getConversor(Conversion conv) {
+        switch(conv){
+            case DEC_BIN:
                 return new ConvertirEnteroBinario();
                 
             default:
@@ -26,7 +26,7 @@ public class ConversorFactory implements AbstractFactory {
     }
 
     @Override
-    public Aritmetico getAritmetico(String type) {
+    public Aritmetico getAritmetico(Conversion conv) {
         return null;
     }
     
