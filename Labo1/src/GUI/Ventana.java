@@ -14,9 +14,7 @@ import Conversor.Conversion;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  *
@@ -38,7 +36,8 @@ public class Ventana extends JPanel{
                 btnMultiplicacion, btnDivision;
 
 
-        JTextField textfield1, textfield2, textfield3, resultado, conversion;
+        JTextField textfield1, textfield2, textfield3,
+                resultado, conversion, label;
 
     public Ventana() {
         this.btnBinDec = new JButton("Bin/Dec");
@@ -52,7 +51,7 @@ public class Ventana extends JPanel{
         this.textfield3 = new JTextField();
         this.resultado = new JTextField();
         this.conversion= new JTextField();
-
+        this.label= new JTextField();
 
 
         resultado.setBounds(20,20,widthSC,heightSC);
@@ -68,15 +67,20 @@ public class Ventana extends JPanel{
         btnDivision.setBounds(95,155,widthBT,heightBT);
         btnBinDec.setBounds(250,120,120,heightBT);
 
+        label.setBounds(20,260,280,30);
 
         btnSuma.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                getFieldsText();
+                getFieldsText(Calculo.ARITMETCO);
                 factory = FactoryProducer.getFactory(Calculo.ARITMETCO);
-                Double total = factory.getAritmetico(Operacion.SUMA).operacion
-                        (a,b);
-                resultado.setText(total.toString());
+                try{
+                    Double total = factory.getAritmetico(Operacion.SUMA).operacion
+                            (a,b);
+                    resultado.setText(total.toString());
+                    label.setText("");
+                }catch(NullPointerException expt){}
+
 
             }
         });
@@ -84,11 +88,14 @@ public class Ventana extends JPanel{
         btnResta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getFieldsText();
+                getFieldsText(Calculo.ARITMETCO);
                 factory = FactoryProducer.getFactory(Calculo.ARITMETCO);
-                Double total = factory.getAritmetico(Operacion.RESTA).operacion
-                        (a,b);
-                resultado.setText(total.toString());
+                try{
+                    Double total = factory.getAritmetico(Operacion.RESTA).operacion
+                            (a,b);
+                    resultado.setText(total.toString());
+                    label.setText("");
+                }catch(NullPointerException expt){}
 
             }
         });
@@ -96,11 +103,14 @@ public class Ventana extends JPanel{
         btnMultiplicacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                getFieldsText();
+                getFieldsText(Calculo.ARITMETCO);
                 factory = FactoryProducer.getFactory(Calculo.ARITMETCO);
-                Double total = factory.getAritmetico(Operacion.MULTIPLICACION).operacion
-                        (a,b);
-                resultado.setText(total.toString());
+                try{
+                    Double total = factory.getAritmetico(Operacion.MULTIPLICACION).operacion
+                            (a,b);
+                    resultado.setText(total.toString());
+                    label.setText("");
+                }catch(NullPointerException expt){}
 
             }
         });
@@ -108,24 +118,29 @@ public class Ventana extends JPanel{
         btnDivision.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                getFieldsText();
+                getFieldsText(Calculo.ARITMETCO);
                 factory = FactoryProducer.getFactory(Calculo.ARITMETCO);
-                Double total = factory.getAritmetico(Operacion.DIVISION).operacion
-                        (a,b);
-                resultado.setText(total.toString());
-
+                try {
+                    Double total = factory.getAritmetico(Operacion.DIVISION).operacion
+                            (a, b);
+                    resultado.setText(total.toString());
+                    label.setText("");
+                }catch(NullPointerException expt){}
             }
         });
 
         btnBinDec.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                num = Integer.parseInt(textfield3.getText());
+                getFieldsText(Calculo.CONVERSION);
                 factory =FactoryProducer.getFactory(Calculo.CONVERSION);
-                String total = factory.getConversor(
-                        Conversion.DEC_BIN).convertir(num);
+                try {
+                    String total = factory.getConversor(
+                            Conversion.DEC_BIN).convertir(num);
+                    conversion.setText(total);
+                    label.setText("");
 
-                conversion.setText(total);
+                }catch (NullPointerException expt){}
             }
         });
 
@@ -135,6 +150,8 @@ public class Ventana extends JPanel{
         textfield1.setEditable(true);
         textfield2.setEditable(true);
         textfield3.setEditable(true);
+        label.setEditable(false);
+
 
 
         add(resultado);
@@ -147,16 +164,26 @@ public class Ventana extends JPanel{
         add(btnMultiplicacion);
         add(btnDivision);
         add(btnBinDec);
+        add(label);
 
         setLayout(null);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         
     }
 
-    private void getFieldsText(){
-        a = Double.parseDouble(textfield1.getText());
-        b = Double.parseDouble(textfield2.getText());
+    private void getFieldsText(Calculo calculo){
+        try{
+        if (calculo==Calculo.ARITMETCO){
 
+                    a = Double.parseDouble(textfield1.getText());
+                    b = Double.parseDouble(textfield2.getText());
+
+        }else if (calculo==Calculo.CONVERSION) {
+                num = Integer.parseInt(textfield3.getText());
+        }
+        }catch(NumberFormatException extp){
+            label.setText("Verificar valores ingresados");
+        }
     }
 
         
